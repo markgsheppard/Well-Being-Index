@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, maximum-scale=1">
+  <title>The Sahm Rule</title>
+  <link rel="icon" href="../favicon.png" type="image/png">
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/font-awesome.css" rel="stylesheet" type="text/css">
+  <link href="../css/animate.css" rel="stylesheet" type="text/css">
+  <link href="../interactive/tool.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="../vis/v-style.css" />
+  <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+  <link href="../css/footer.css" rel="stylesheet" type="text/css">
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+</head>
+
+<body>
+
+  <header id="header_wrapper">
+    <div class="container">
+      <div class="header_box">
+        <div class="logo">
+          <a href="https://markgsheppard.github.io/SahmRule/"><img src="../img/logo.png" alt="logo"
+              style="width: 120px; height: auto;">
+          </a>
+        </div>
+        <nav class="navbar navbar-inverse" role="navigation">
+          <div class="navbar-header">
+            <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
+              <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          </div>
+          <div id="main-nav" class="collapse navbar-collapse navStyle">
+            <ul class="nav navbar-nav" id="mainNav">
+              <li class="active"><a href="#hero_section" class="scroll-link">Overview</a></li>
+              <li><a href="https://markgsheppard.github.io/SahmRule/" class="scroll-link">About</a></li>
+              <li><a href="https://markgsheppard.github.io/SahmRule/" class="scroll-link">Methodology</a></li>
+              <li><a href="https://markgsheppard.github.io/SahmRule/interactive/">Interactive Tool</a></li>
+              <li><a href="https://markgsheppard.github.io/SahmRule/" class="scroll-link">Data</a></li>
+              <li><a href="https://markgsheppard.github.io/SahmRule/" class="scroll-link">Contributors</a></li>
+              <li><a href="https://markgsheppard.github.io/SahmRule/" class="scroll-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div>
+      <h2>Modified Sahm Rule</h2>
+      <div class="subtitle">
+        Interactive Tool Version 2.2 Beta | Last updated: <span id="last_updated"></span>
+      </div>
+      <div class="subtitle">
+        Show with Recessions, Data from 1948 to Present
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-3 col-sm-12 lg:border-right">
+        <div class="title">Results</div>
+        <div class="row gap-1">
+          <div class="col-sm-4">
+            <div class="stat-box">
+              <div class="stat-label">Advance of Committee</div>
+              <div class="metric" id="committee_lead_time">-</div>
+              <div class="stat-sub-label">Days</div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="stat-box">
+              <div class="stat-label">Advance of Recession</div>
+              <div class="metric" id="recession_lead_time">-</div>
+              <div class="stat-sub-label">Days</div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="stat-box">
+              <div class="stat-label">Accuracy <br /> <span class="text-muted text-small"> &ZeroWidthSpace; </span>
+              </div>
+              <div class="metric" id="accuracy">-</div>
+              <div class="stat-sub-label"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 lg:border-right">
+        <div class="title">Modifications</div>
+        <div class="row gap-1">
+          <div class="col-sm-4">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Base <br /> <span class="text-muted text-small">(Minuend)</span></div>
+              <select class="form-control" id="base-select" value="U6RATE"></select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Relative <br /> <span class="text-muted text-small">(Subtrahend)</span></div>
+              <select class="form-control" id="relative-select" value="U6RATE"></select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Recession <br /> <span class="text-muted text-small"> &ZeroWidthSpace; </span>
+              </div>
+              <select class="form-control" id="recession-select" value="USREC"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12 lg:border-right">
+        <div class="title">Smoothing Level</div>
+        <div class="row gap-1">
+          <div class="col-sm-4">
+            <div class="stat-box rows-2">
+              <div class="stat-label">
+                Base <br />
+                <span class="text-muted text-small">(Minuend)</span>
+              </div>
+              <div class="slider-container">
+                <span class="slider-value"></span>
+                <input type="range" min="1" max="24" step="1" value="3" class="form-control" id="k-slider">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Relative <br />
+                <span class="text-muted text-small">(Subtrahend)</span>
+              </div>
+              <div class="slider-container">
+                <span class="slider-value"></span>
+                <input type="range" min="1" max="24" step="1" value="12" class="form-control" id="m-slider">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Time Period <br /> <span class="text-muted text-small">(Minimum)</span></div>
+              <div class="slider-container">
+                <span class="slider-value"></span>
+                <input type="range" min="3" max="60" step="1" value="12" class="form-control" id="time-period-slider">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12">
+        <div class="title">Adjustments</div>
+        <div class="row gap-1">
+          <div class="col-sm-3">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Seasonal <br /> <span class="text-muted text-small"> &ZeroWidthSpace; </span>
+              </div>
+              <div class="checkbox-container">
+                <input type="checkbox" id="seasonal-checkbox">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Threshold <br /> <span class="text-muted text-small">(Alpha)</span></div>
+              <div class="slider-container">
+                <span class="slider-value"></span>
+                <input type="range" min="0" max="3" step="0.1" value="0.5" class="form-control" id="alpha-slider">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="stat-box rows-2">
+              <div class="stat-label">Natural Rate</div>
+              <div class="slider-container">
+                <span class="slider-value"></span>
+                <input type="range" min="0" max="7" step="0.1" value="0" class="form-control" id="natural-rate-slider">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="stat-box rows-2">
+              <div class="stat-label">
+                Preceding <br /> <span class="text-muted text-small"> &ZeroWidthSpace; </span>
+              </div>
+              <div class="checkbox-container">
+                <input type="checkbox" id="preceding-checkbox">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="control-buttons">
+          <button type="button" class="btn btn-light btn-sm" id="remove-line-button">
+            <i class="fa fa-minus-circle"></i>
+            Remove line
+          </button>
+          <button type="button" class="btn btn-light btn-sm" id="add-line-button">
+            <i class="fa fa-plus-circle"></i>
+            Add line
+          </button>
+          <button type="button" class="btn btn-light btn-sm" id="download-data-button">
+            <i class="fa fa-download"></i>
+            Download data
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="chart-container" id="sahm_chart"></div>
+      </div>
+    </div>
+    <br />
+  </main>
+
+
+  <!--Footer-->
+  <footer class="footer_wrapper" id="contact">
+    <div class="container">
+      <section class="page_section contact" id="contact">
+        <div class="row">
+          <div class="col-lg-4 wow fadeInLeft">
+            <div class="contact_info">
+              <div class="detail">
+                <p>365 5th Ave
+                  </br>New York, NY 10016
+                  </br>+1.408.384.2986
+                  </br>msheppard@gradcenter.cuny.edu
+                </p>
+              </div>
+
+              <ul class="social_links">
+                <li class="twitter animated bounceIn wow delay-02s"><a href="javascript:void(0)"><i
+                      class="fa fa-twitter"></i></a></li>
+                <li class="facebook animated bounceIn wow delay-03s"><a href="javascript:void(0)"><i
+                      class="fa fa-facebook"></i></a></li>
+                <li class="gplus animated bounceIn wow delay-05s"><a href="javascript:void(0)"><i
+                      class="fa-brands fa-bluesky"></i></a></li>
+              </ul>
+            </div>
+          </div>
+      </section>
+    </div>
+    <div class="container">
+      <div class="footer_bottom"><span>Copyright © 2025, Design and Visualizations by <a
+            href="http://www.markgsheppard.com">Mark G. Sheppard</a>. </span> </div>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="module" type="text/javascript">
+    import SahmRuleDashboard from "./sahm-rule-dashboard.js";
+    window.app = new SahmRuleDashboard({
+      lineConfigs: [],
+      chartElementId: 'sahm_chart',
+      components: new Set(['legend', 'footer']),
+    })
+  </script>
+</body>
+
+</html>

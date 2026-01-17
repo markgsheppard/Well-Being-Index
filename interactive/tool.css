@@ -1,0 +1,164 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Raleway:800,700,400);
+@import url(http://fonts.googleapis.com/css?family=Signika:400,600);
+@import url(../css/navbar.css);
+
+body {
+  background: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.btn:focus {
+  outline: none !important;
+}
+
+.row.gap-1 {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.row.gap-1 > div {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sahm_chart {
+  --color-primary-300: #6fc3f3;
+  --color-primary-900: #2b4fb1;
+}
+
+@media (min-width: 992px) {
+  .lg\:border-right {
+    border-right: 1px solid #eee;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0rem 0rem 1rem 0rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #888888;
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
+  .title {
+    padding: 1rem 0rem 1rem 0rem;
+  }
+}
+
+.text-muted {
+  color: #888888;
+  font-weight: 400;
+}
+
+.text-small {
+  font-size: 1rem;
+}
+
+.label {
+  color: #888888;
+}
+
+.stat-label {
+  text-align: center;
+  align-self: end;
+  font-size: 1.2rem;
+  color: #888888;
+  font-weight: 600;
+  line-height: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.stat-sub-label {
+  text-align: center;
+  align-self: end;
+  font-size: 1rem;
+  color: #888888;
+  font-weight: bold;
+  line-height: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.metric {
+  line-height: 3.5rem;
+  font-size: 3.2rem;
+  color: #888888;
+  font-weight: 600;
+  text-align: center;
+}
+
+.stat-box {
+  display: grid;
+  grid-template-rows: 45px auto auto;
+  gap: 5px;
+}
+
+.stat-box.rows-2 {
+  grid-template-rows: 45px auto;
+}
+
+input.form-control,
+input.form-control:focus {
+  border: none;
+  box-shadow: none;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+select.form-control {
+  font-size: 1.1rem;
+  padding: 6px;
+}
+
+.slider-container {
+  position: relative;
+}
+
+.slider-value {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.checkbox-container {
+  padding-top: 6px;
+  text-align: center;
+}
+
+.control-buttons {
+  text-align: right;
+}
+
+.legend {
+  margin-bottom: 1rem;
+}
+
+.legend .swatch {
+  transition: background-color 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 0.25rem 0.25rem 0 0;
+  border-bottom: 1px solid transparent;
+}
+
+.legend .swatch:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.legend .swatch[data-active="true"] {
+  border-bottom: 1px solid rgb(254, 187, 2);
+}
