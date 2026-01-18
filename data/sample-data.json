@@ -1,0 +1,24 @@
+{
+  "note": "This is sample data structure for FRED integration",
+  "categories": [
+    {
+      "id": "aggregates",
+      "name": "Aggregates",
+      "subcategories": [
+        {
+          "id": "cpi-u",
+          "name": "CPI-U",
+          "fredSeriesId": "CPIAUCSL",
+          "indicator": {
+            "name": "CPI-U, Inflation",
+            "value": 2.7,
+            "format": "decimal",
+            "description": "Monthly Data, United States",
+            "normalizedValue": 0.73,
+            "source": "FRED"
+          }
+        }
+      ]
+    }
+  ]
+}
